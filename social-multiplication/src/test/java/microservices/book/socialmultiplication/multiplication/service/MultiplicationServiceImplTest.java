@@ -1,6 +1,8 @@
 package microservices.book.socialmultiplication.multiplication.service;
 
-import microservices.book.socialmultiplication.multiplication.model.Multiplication;
+import microservices.book.socialmultiplication.multiplication.domain.Multiplication;
+import microservices.book.socialmultiplication.multiplication.domain.MultiplicationResultAttempt;
+import microservices.book.socialmultiplication.multiplication.domain.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -24,12 +26,39 @@ public class MultiplicationServiceImplTest {
 
     @Test
     public void createRandomMultiplicationTest() {
-        given(randomGeneratorService.generateRandomFactor()).willReturn(50, 30);
 
+        given(randomGeneratorService.generateRandomFactor()).willReturn(50, 30);
         Multiplication multiplication = multiplicationServiceImpl.createRandomMultiplication();
 
         assertThat(multiplication.getFactorA()).isEqualTo(50);
         assertThat(multiplication.getFactorB()).isEqualTo(30);
-        assertThat(multiplication.getResult()).isEqualTo(1500);
+    }
+
+    @Test
+    public void checkCorrectAttemptTest() {
+
+        // Test setup to test the result attempt
+        Multiplication multiplication = new Multiplication(50, 60);
+        User user = new User("john_doe");
+        MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, multiplication, 3000);
+
+        // when
+        boolean attemptResult = multiplicationServiceImpl.checkAttempt(attempt);
+
+        assertThat(attemptResult).isTrue();
+    }
+
+    @Test
+    public void checkWrongAttemptTest() {
+
+        // Test setup to test the result attempt
+        Multiplication multiplication = new Multiplication(50, 60);
+        User user = new User("john_doe");
+        MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, multiplication, 3010);
+
+        // when
+        boolean attemptResult = multiplicationServiceImpl.checkAttempt(attempt);
+
+        assertThat(attemptResult).isFalse();
     }
 }

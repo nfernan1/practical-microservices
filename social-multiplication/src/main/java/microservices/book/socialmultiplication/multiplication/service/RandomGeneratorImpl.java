@@ -11,10 +11,6 @@ public class RandomGeneratorImpl implements RandomGeneratorService {
     final static int MIN = 11;
     final static int MAX = 99;
 
-    @Autowired
-    public RandomGeneratorImpl( ) {
-    }
-
     @Override
     public int generateRandomFactor() {
 

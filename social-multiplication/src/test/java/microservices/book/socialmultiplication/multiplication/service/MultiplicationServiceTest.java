@@ -1,6 +1,6 @@
 package microservices.book.socialmultiplication.multiplication.service;
 
-import microservices.book.socialmultiplication.multiplication.model.Multiplication;
+import microservices.book.socialmultiplication.multiplication.domain.Multiplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +29,5 @@ public class MultiplicationServiceTest {
 
         assertThat(multiplication.getFactorA()).isEqualTo(50);
         assertThat(multiplication.getFactorB()).isEqualTo(30);
-        assertThat(multiplication.getResult()).isEqualTo(1500);
     }
 }
