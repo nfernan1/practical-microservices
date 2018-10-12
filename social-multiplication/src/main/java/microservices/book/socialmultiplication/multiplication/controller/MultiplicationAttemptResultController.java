@@ -19,7 +19,7 @@ public final class MultiplicationAttemptResultController {
     public MultiplicationAttemptResultController(MultiplicationService multiplicationService) {
         this.multiplicationService = multiplicationService;
     }
-    private static final class ResultResponse {
+    public static final class ResultResponse {
         private final boolean correct;
         public ResultResponse(boolean correct) {
             this.correct = correct;
