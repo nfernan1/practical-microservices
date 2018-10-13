@@ -8,8 +8,11 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 public final class Multiplication {
-    private final int factorA;
-    private final int factorB;
+    private int factorA = 0;
+    private int factorB = 0;
+
+    public Multiplication() {
+    }
 
     public Multiplication(int factorA, int factorB) {
         this.factorA = factorA;

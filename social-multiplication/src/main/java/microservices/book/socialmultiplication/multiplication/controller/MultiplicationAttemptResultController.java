@@ -1,5 +1,8 @@
 package microservices.book.socialmultiplication.multiplication.controller;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import microservices.book.socialmultiplication.multiplication.domain.MultiplicationResultAttempt;
 import microservices.book.socialmultiplication.multiplication.service.MultiplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +22,12 @@ public final class MultiplicationAttemptResultController {
     public MultiplicationAttemptResultController(MultiplicationService multiplicationService) {
         this.multiplicationService = multiplicationService;
     }
-    public static final class ResultResponse {
+
+    @RequiredArgsConstructor
+    @NoArgsConstructor(force = true)
+    @Getter
+    static final class ResultResponse {
         private final boolean correct;
-        public ResultResponse(boolean correct) {
-            this.correct = correct;
-        }
     }
 
     @PostMapping
