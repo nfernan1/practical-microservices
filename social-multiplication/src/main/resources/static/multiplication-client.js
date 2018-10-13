@@ -1,6 +1,26 @@
 $(document).ready(function() {
-    updateMultiplication();
+    getMultiplication();
+    postResultAttempt();
+});
 
+function getMultiplication() {
+    $.ajax({
+        url: "http://localhost:8080/multiplications/random"
+    }).then(function(data) {
+
+        // Multiplcation(factorA, factorB) - gets returned
+
+        // Clean form
+        $("#attempt-form").find("input[name='result-attempt']").val("");
+        $("#attempt-form").find("input[name='user-alias']").val("");
+
+        // Create Random challenge and load API data
+        $(".multiplication-a").empty().append(data.factorA);
+        $(".multiplication-b").empty().append(data.factorB);
+    });
+}
+
+function postResultAttempt() {
     $("#attempt-form").submit(function(event) {
         event.preventDefault();
 
@@ -28,23 +48,6 @@ $(document).ready(function() {
                 }
             }
         });
-        updateMultiplication();
-    });
-});
-
-function updateMultiplication() {
-    $.ajax({
-        url: "http://localhost:8080/multiplications/random"
-    }).then(function(data) {
-
-        // Multiplcation(factorA, factorB) - gets returned
-        console.log(data);
-        // Clean form
-        $("#attempt-form").find("input[name='result-attempt']").val("");
-        $("#attempt-form").find("input[name='user-alias']").val("");
-
-        // Create Random challenge and load API data
-        $(".multiplication-a").empty().append(data.factorA);
-        $(".multiplication-b").empty().append(data.factorB);
+        getMultiplication();
     });
 }
