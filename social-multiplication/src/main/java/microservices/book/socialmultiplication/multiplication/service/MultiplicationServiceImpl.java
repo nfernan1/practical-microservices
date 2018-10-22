@@ -4,6 +4,7 @@ import microservices.book.socialmultiplication.multiplication.domain.Multiplicat
 import microservices.book.socialmultiplication.multiplication.domain.MultiplicationResultAttempt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 @Service
 public class MultiplicationServiceImpl implements MultiplicationService {
@@ -24,7 +25,18 @@ public class MultiplicationServiceImpl implements MultiplicationService {
 
     @Override
     public boolean checkAttempt(final MultiplicationResultAttempt resultAttempt) {
-        return resultAttempt.getResultAttempt() ==
+        boolean correct = resultAttempt.getResultAttempt() ==
                 resultAttempt.getMultiplication().getFactorA() * resultAttempt.getMultiplication().getFactorB();
+
+        Assert.isTrue(!resultAttempt.isCorrect(), "You can't send an attempt marked as correct!");
+
+        // Creates a copy that sets the correct field in the object
+        MultiplicationResultAttempt checkedAttempt =
+                new MultiplicationResultAttempt(resultAttempt.getUser(),
+                        resultAttempt.getMultiplication(),
+                        resultAttempt.getResultAttempt(),
+                        correct);
+
+        return correct;
     }
 }

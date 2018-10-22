@@ -40,14 +40,17 @@ function postResultAttempt() {
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            success: function(result) {
-                if (result.correct) {
-                    $(".result-message").empty().append("The result is Correct!");
-                } else {
-                    $(".result-message").empty().append("You ain't right! Try again!");
-                }
-            }
+            async: false,
+            success: resultAttemptSuccess()
         });
         getMultiplication();
     });
+}
+
+function resultAttemptSuccess(result) {
+    if (result.correct) {
+        $(".result-message").empty().append("The result is Correct!");
+    } else {
+        $(".result-message").empty().append("You ain't right! Try again!");
+    }
 }
