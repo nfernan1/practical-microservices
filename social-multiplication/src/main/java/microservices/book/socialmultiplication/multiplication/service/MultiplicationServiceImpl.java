@@ -2,18 +2,30 @@ package microservices.book.socialmultiplication.multiplication.service;
 
 import microservices.book.socialmultiplication.multiplication.domain.Multiplication;
 import microservices.book.socialmultiplication.multiplication.domain.MultiplicationResultAttempt;
+import microservices.book.socialmultiplication.multiplication.domain.User;
+import microservices.book.socialmultiplication.multiplication.repository.MultiplicationResultAttemptRepository;
+import microservices.book.socialmultiplication.multiplication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+
+import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 public class MultiplicationServiceImpl implements MultiplicationService {
 
     private RandomGeneratorService randomGeneratorService;
+    private MultiplicationResultAttemptRepository attemptRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    public MultiplicationServiceImpl(RandomGeneratorService randomGeneratorService) {
+    public MultiplicationServiceImpl(RandomGeneratorService randomGeneratorService,
+                                     MultiplicationResultAttemptRepository attemptRepository,
+                                     UserRepository userRepository) {
         this.randomGeneratorService = randomGeneratorService;
+        this.attemptRepository = attemptRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -23,8 +35,12 @@ public class MultiplicationServiceImpl implements MultiplicationService {
         return new Multiplication(factorA, factorB);
     }
 
+    @Transactional
     @Override
     public boolean checkAttempt(final MultiplicationResultAttempt resultAttempt) {
+
+        Optional<User> user = userRepository.findByAlias(resultAttempt.getUser().getAlias());
+
         boolean correct = resultAttempt.getResultAttempt() ==
                 resultAttempt.getMultiplication().getFactorA() * resultAttempt.getMultiplication().getFactorB();
 
@@ -32,11 +48,12 @@ public class MultiplicationServiceImpl implements MultiplicationService {
 
         // Creates a copy that sets the correct field in the object
         MultiplicationResultAttempt checkedAttempt =
-                new MultiplicationResultAttempt(resultAttempt.getUser(),
+                new MultiplicationResultAttempt(user.orElse(resultAttempt.getUser()),
                         resultAttempt.getMultiplication(),
                         resultAttempt.getResultAttempt(),
                         correct);
 
+        attemptRepository.save(checkedAttempt);
         return correct;
     }
 }
