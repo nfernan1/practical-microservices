@@ -1,9 +1,8 @@
 $(document).ready(function() {
-    getMultiplication();
     postResultAttempt();
 });
 
-function getMultiplication() {
+function updateMultiplication() {
     $.ajax({
         url: "http://localhost:8080/multiplications/random"
     }).then(function(data) {
@@ -21,6 +20,8 @@ function getMultiplication() {
 }
 
 function postResultAttempt() {
+    updateMultiplication();
+
     $("#attempt-form").submit(function(event) {
         event.preventDefault();
 
@@ -41,16 +42,30 @@ function postResultAttempt() {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             async: false,
-            success: resultAttemptSuccess()
+            success: function(result) {
+                if (result.correct) {
+                    $(".result-message").empty().append("The result is Correct!");
+                } else {
+                    $(".result-message").empty().append("You ain't right! Try again!");
+                }
+            }
         });
-        getMultiplication();
+        updateMultiplication();
+        updateStats(userAlias);
     });
 }
 
-function resultAttemptSuccess(result) {
-    if (result.correct) {
-        $(".result-message").empty().append("The result is Correct!");
-    } else {
-        $(".result-message").empty().append("You ain't right! Try again!");
-    }
+function updateStats(alias) {
+    $.ajax({
+        url: "http://localhost:8080/results?alias=" + alias,
+    }).then(function(data) {
+        $("#stats-body").empty();
+        data.forEach(function(row) {
+           $("#stats-body").append(
+               "<tr><td>" + row.id + "</td>" +
+               "<td>" + row.multiplication.factorA + 'x' + row.multiplication.factorB + "</td>" +
+               "<td>" + row.resultAttempt + "</td>" +
+               "<td>" + (row.correct === true ? 'YES' : 'NO') + "</td></tr>");
+        });
+    });
 }

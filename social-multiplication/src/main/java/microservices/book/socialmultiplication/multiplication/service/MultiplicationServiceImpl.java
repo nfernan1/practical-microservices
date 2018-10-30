@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -48,12 +49,18 @@ public class MultiplicationServiceImpl implements MultiplicationService {
 
         // Creates a copy that sets the correct field in the object
         MultiplicationResultAttempt checkedAttempt =
-                new MultiplicationResultAttempt(user.orElse(resultAttempt.getUser()),
+                new MultiplicationResultAttempt(
+                        user.orElse(resultAttempt.getUser()),
                         resultAttempt.getMultiplication(),
                         resultAttempt.getResultAttempt(),
                         correct);
 
         attemptRepository.save(checkedAttempt);
         return correct;
+    }
+
+    @Override
+    public List<MultiplicationResultAttempt> getStatsForUser(String userAlias) {
+        return attemptRepository.findTop5ByUserAliasOrderByIdDesc(userAlias);
     }
 }
