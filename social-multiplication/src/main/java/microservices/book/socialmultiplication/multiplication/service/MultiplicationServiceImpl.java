@@ -1,6 +1,5 @@
 package microservices.book.socialmultiplication.multiplication.service;
 
-import jdk.jfr.Event;
 import microservices.book.socialmultiplication.multiplication.domain.Multiplication;
 import microservices.book.socialmultiplication.multiplication.domain.MultiplicationResultAttempt;
 import microservices.book.socialmultiplication.multiplication.domain.User;

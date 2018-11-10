@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.BDDMockito.given;
 
 @RunWith(SpringRunner.class)
@@ -27,7 +27,7 @@ public class MultiplicationServiceTest {
 
         Multiplication multiplication = multiplicationService.createRandomMultiplication();
 
-        assertThat(multiplication.getFactorA()).isEqualTo(50);
-        assertThat(multiplication.getFactorB()).isEqualTo(30);
+        assertEquals(multiplication.getFactorA(), 50);
+        assertEquals(multiplication.getFactorB(), 30);
     }
 }
