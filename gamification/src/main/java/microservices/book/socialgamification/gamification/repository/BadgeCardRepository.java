@@ -1,6 +1,6 @@
-package microservices.book.gamification.repository;
+package microservices.book.socialgamification.gamification.repository;
 
-import microservices.book.gamification.domain.BadgeCard;
+import microservices.book.socialgamification.gamification.domain.BadgeCard;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

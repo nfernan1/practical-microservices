@@ -1,6 +1,6 @@
-package microservices.book.gamification.service;
+package microservices.book.socialgamification.gamification.service;
 
-import microservices.book.gamification.domain.LeaderBoardRow;
+import microservices.book.socialgamification.gamification.domain.LeaderBoardRow;
 
 import java.util.List;
 

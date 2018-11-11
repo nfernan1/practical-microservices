@@ -1,7 +1,7 @@
-package microservices.book.gamification.repository;
+package microservices.book.socialgamification.gamification.repository;
 
-import microservices.book.gamification.domain.LeaderBoardRow;
-import microservices.book.gamification.domain.ScoreCard;
+import microservices.book.socialgamification.gamification.domain.LeaderBoardRow;
+import microservices.book.socialgamification.gamification.domain.ScoreCard;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

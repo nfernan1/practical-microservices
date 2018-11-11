@@ -1,10 +1,12 @@
-package microservices.book.gamification.service;
+package microservices.book.socialgamification.gamification.service;
 
-import microservices.book.gamification.domain.LeaderBoardRow;
-import microservices.book.gamification.repository.ScoreCardRepository;
+import microservices.book.socialgamification.gamification.domain.LeaderBoardRow;
+import microservices.book.socialgamification.gamification.repository.ScoreCardRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class LeaderBoardServiceImpl implements LeaderBoardService {
 
     private ScoreCardRepository scoreCardRepository;

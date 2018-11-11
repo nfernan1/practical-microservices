@@ -1,4 +1,4 @@
-package microservices.book.gamification.domain;
+package microservices.book.socialgamification.gamification.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -26,12 +26,12 @@ public final class GameStats {
     public GameStats() {
         this.userId = 0L;
         this.score = 0;
-        this.badges = new ArrayList<Badge>();
+        this.badges = new ArrayList<>();
     }
 
     // Build a default empty gamestats board for user
     public static GameStats emptyStats(final Long userId) {
-        return new GameStats(userId, 0, Collections.<Badge>emptyList());
+        return new GameStats(userId, 0, Collections.emptyList());
     }
 
     // Make badges immutable

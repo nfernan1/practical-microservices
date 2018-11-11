@@ -1,6 +1,6 @@
-package microservices.book.gamification.service;
+package microservices.book.socialgamification.gamification.service;
 
-import microservices.book.gamification.domain.GameStats;
+import microservices.book.socialgamification.gamification.domain.GameStats;
 
 public interface GameService {
 

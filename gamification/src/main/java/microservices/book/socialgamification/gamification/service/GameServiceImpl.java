@@ -1,12 +1,12 @@
-package microservices.book.gamification.service;
+package microservices.book.socialgamification.gamification.service;
 
 import lombok.extern.slf4j.Slf4j;
-import microservices.book.gamification.domain.Badge;
-import microservices.book.gamification.domain.BadgeCard;
-import microservices.book.gamification.domain.GameStats;
-import microservices.book.gamification.domain.ScoreCard;
-import microservices.book.gamification.repository.BadgeCardRepository;
-import microservices.book.gamification.repository.ScoreCardRepository;
+import microservices.book.socialgamification.gamification.domain.Badge;
+import microservices.book.socialgamification.gamification.domain.BadgeCard;
+import microservices.book.socialgamification.gamification.domain.GameStats;
+import microservices.book.socialgamification.gamification.domain.ScoreCard;
+import microservices.book.socialgamification.gamification.repository.BadgeCardRepository;
+import microservices.book.socialgamification.gamification.repository.ScoreCardRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
