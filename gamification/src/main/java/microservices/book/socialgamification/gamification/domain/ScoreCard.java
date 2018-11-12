@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -17,6 +18,7 @@ Score linked to game and user
 @Getter
 @ToString
 @EqualsAndHashCode
+@Entity
 public final class ScoreCard {
 
     public static final int DEFAULT_SCORE = 10;
