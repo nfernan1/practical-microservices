@@ -15,7 +15,7 @@ public interface ScoreCardRepository extends CrudRepository<ScoreCard, Long> {
      * @param userId
      * @return total score for a user
      */
-    @Query("SELECT SUM(s.score) FROM microservices.book.socialgamification.gamification.domain.ScoreCard s WHERE s.userId = :userId GROUP BY s.userId")
+    @Query("SELECT SUM(s.score) FROM microservices.book.socialgamification.gamification.domain.ScoreCard s WHERE s.userId = userId GROUP BY s.userId")
     int getTotalScoreForUser(@Param("userId") final Long userId);
 
     /**
