@@ -9,5 +9,6 @@ public enum Badge {
 
     // Other badges for conditions
     FIRST_ATTEMPT,
-    FIRST_WON
+    FIRST_WON,
+    LUCKY_NUMBER
 }
