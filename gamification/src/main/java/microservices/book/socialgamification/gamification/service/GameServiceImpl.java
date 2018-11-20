@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class GameServiceImpl implements GameService {
 
-    public static final int LUCKY_NUMBER = 42
+    public static final int LUCKY_NUMBER = 42;
 
     private ScoreCardRepository scoreCardRepository;
     private BadgeCardRepository badgeCardRepository;

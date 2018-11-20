@@ -16,7 +16,7 @@ public class RabbitMQConfiguration {
     public TopicExchange multiplicationExchange(@Value("${multiplication.exchange}") final String exchangeName) {
         return new TopicExchange(exchangeName);
     }
-    
+
     @Bean
     public RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory){
         final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
